@@ -1,39 +1,24 @@
-# ✈️ Airline Revenue & Passenger Behaviour Intelligence Dashboard
+# Airline Revenue & Passenger Behaviour Intelligence Dashboard | Power BI · DAX
 
-> An interactive 2-page Power BI dashboard analysing $645K in airline revenue across 250 bookings, 6 airlines, and 8 global cities — uncovering pricing patterns, passenger behaviour, and revenue drivers.
-
----
-
-## 🔗 Links
-
-[![Power BI](https://img.shields.io/badge/Power%20BI-Live%20Dashboard-yellow?style=flat&logo=powerbi)](https://app.powerbi.com/groups/me/reports/d1af0f15-4af0-4fe7-96e9-874b84047de1/58402d2b1828c7d30048?experience=power-bi)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Prachi-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/prachi252/)
-[![GitHub](https://img.shields.io/badge/GitHub-Prachi0259-black?style=flat&logo=github)](https://github.com/Prachi0259)
+Power BI dashboard analysing $645K in airline revenue across 250 bookings, 6 airlines, and 8 global cities — uncovering pricing patterns, passenger behaviour, and revenue drivers.
 
 ---
 
-## 📸 Dashboard Preview
+## Links
 
-### Page 1 — Revenue Drivers & Passenger Segmentation
-![Page 1](screenshots/Page%201.png)
-
-### Page 2 — Flight Duration & Pricing Pattern Analysis
-![Page 2](screenshots/Page%202.png)
+[Live Dashboard](https://app.powerbi.com/groups/me/reports/d1af0f15-4af0-4fe7-96e9-874b84047de1/58402d2b1828c7d30048?experience=power-bi) · [LinkedIn](https://www.linkedin.com/in/prachi252/) · [GitHub](https://github.com/Prachi0259)
 
 ---
 
-## 🎯 Project Objective
+## About
 
-Airlines price tickets differently across routes, classes, and cities — but what actually drives revenue? This project analyses booking data to answer:
+This project analyses airline booking data to understand what actually drives revenue across routes, travel classes, and cities. The dashboard spans two pages — revenue segmentation and flight duration analysis — built using Power BI with custom DAX measures and Power Query transformations.
 
-- Which airlines and cities generate the most revenue and why
-- Whether ticket price actually correlates with flight distance
-- How passenger age and payment behaviour varies across segments
-- Which routes carry the highest duration variance
+**Source:** flight_bookings.csv
 
 ---
 
-## 📂 Dataset Overview
+## Dataset
 
 | Column | Description |
 |--------|-------------|
@@ -47,86 +32,36 @@ Airlines price tickets differently across routes, classes, and cities — but wh
 | Flight_Duration_hr | Duration in hours |
 | Distance_km | Route distance in kilometres |
 
-**Total Records:** 250 bookings · **Source:** flight_bookings.csv
+**Total Records:** 250 bookings
 
 ---
 
-## 💡 Key Findings
+## Key Findings
 
-**B Airways leads revenue at $129K** — 46% higher than Q Airways at $88K, driven by premium class bookings on high-volume routes rather than sheer number of flights.
+B Airways leads revenue at $129K — 46% higher than Q Airways at $88K, driven by premium class bookings rather than volume.
 
-**Mumbai is the highest-grossing departure city**, with Delhi and London following closely — pointing to these as priority markets for capacity and pricing decisions.
+Ticket price has no linear relationship with flight distance across 1,889K km of routes. Pricing is class-driven, not distance-driven — Business and First class command higher fares regardless of route length.
 
-**Ticket price has no linear relationship with flight distance** — scatter plot analysis across 1,889K km of routes confirms pricing is class-driven, not distance-driven. Business and First class consistently command higher fares regardless of route length.
+Payment preferences are evenly split across 6 methods at approximately 18% each, with no dominant channel — indicating broad customer diversity and the need for equal payment infrastructure investment.
 
-**Payment preferences are evenly split across 6 methods (~18% each)** — no dominant channel exists, which means restricting payment options would directly hurt conversion across all customer segments.
-
-**Air I operates the longest routes at 13 hrs avg duration** — likely running long-haul international corridors, whilst S Airlines at 9 hrs focuses on shorter regional routes.
-
-**London and Frankfurt show the highest flight duration variance** — both cities handle a mix of short-haul European and long-haul intercontinental routes.
+Air I operates the longest routes at 13 hrs average duration, while London and Frankfurt show the highest flight duration variance due to a mix of short-haul and long-haul routes.
 
 ---
 
-## 📈 Dashboard Pages
+## Dashboard
 
-### Page 1 — Revenue Drivers & Passenger Segmentation
-**KPIs:** Total Bookings · Total Revenue · Avg Ticket Price · Total Distance · Avg Duration
+**Page 1 — Revenue Drivers & Passenger Segmentation**
+Revenue by Airline, Departure City, Payment Method, and Passenger Age Group. Booking split by payment method and travel class with airline slicer.
 
-**Visuals:**
-- Revenue by Airline (horizontal bar)
-- Revenue by Departure City (column chart)
-- Revenue by Payment Method (matrix)
-- Revenue by Passenger Age Group (column)
-- Booking Split by Payment Method (donut)
-- Bookings by Travel Class (bar)
-- Airline slicer for cross-filtering
-
-### Page 2 — Flight Duration & Pricing Pattern Analysis
-**KPIs:** Total Bookings · Avg Flight Duration · Longest Route · Most Common Duration
-
-**Visuals:**
-- Avg Flight Duration by Class (bar)
-- Flight Duration Variance by City (clustered column)
-- Ticket Price vs Flight Duration (scatter — coloured by Travel Class)
-- Flight Duration by Airline (bar)
-- Flight Duration by Age Group (column)
-- Avg Duration by Payment Method (matrix)
+**Page 2 — Flight Duration & Pricing Pattern Analysis**
+Avg Flight Duration by Class, Duration Variance by City, Ticket Price vs Flight Duration scatter (coloured by Travel Class), Duration by Airline and Age Group.
 
 ---
 
-## 🛠️ Tools & Techniques
-
-| Tool | Usage |
-|------|-------|
-| Power BI Desktop | Dashboard development |
-| DAX | Custom measures |
-| Power Query | Data transformation |
-| Custom JSON Theme | Visual branding (Navy + Sky Blue + Amber) |
-
-**DAX Measures:**
-```dax
-Longest Route (hrs) = MAX(flight_bookings[Flight_Duration_hr])
-
-Most Common Duration (hrs) =
-MINX(
-    TOPN(1,
-        SUMMARIZE(flight_bookings,
-            flight_bookings[Flight_Duration_hr],
-            "Freq", COUNT(flight_bookings[Flight_Duration_hr])
-        ),
-        [Freq], DESC
-    ),
-    flight_bookings[Flight_Duration_hr]
-)
-```
-
----
-
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 Airline-Revenue-Passenger-Analytics/
-│
 ├── Airline_Revenue_Passenger_Behavior_Intelligence_Dashboard.pbix
 ├── data/
 │   └── flight_bookings.csv
@@ -138,19 +73,13 @@ Airline-Revenue-Passenger-Analytics/
 
 ---
 
-## 🚀 How to Run
+## Tools
 
-1. Clone this repository
-2. Open `Airline_Revenue_Passenger_Behavior_Intelligence_Dashboard.pbix` in Power BI Desktop
-3. If data does not load, go to Home → Transform Data → Data Source Settings and repoint to `data/flight_bookings.csv`
-4. Use the Airline slicer on both pages to filter by carrier
+Power BI Desktop · DAX · Power Query 
 
 ---
 
-## 👩‍💻 Author
+## Author
 
 **Prachi**
-📧 prachi7.work@gmail.com
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/prachi252/)
-[![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)](https://github.com/Prachi0259)
+prachi7.work@gmail.com · [LinkedIn](https://www.linkedin.com/in/prachi252/) · [GitHub](https://github.com/Prachi0259)
